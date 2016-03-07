@@ -4,6 +4,10 @@ angular.module('AngularRails', ['ngRoute','templates'])
           .when('/', {
               templateUrl: 'home.html',
               controller: 'HomeCtrl'
+          })
+          .when('/:id', {
+              templateUrl: 'user.html',
+              controller: 'UserCtrl'
           });
       $locationProvider.html5Mode(true);
   }]);

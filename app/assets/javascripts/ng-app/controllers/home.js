@@ -19,7 +19,6 @@ angular.module('AngularRails').controller('HomeCtrl', HomeCtrl).
     $scope.person = $routeParams.id
   }]);*/
 
-angular.module('AngularRails')
-    .controller('HomeCtrl', function ($scope) {
-        $scope.things = ['Angular', 'Rails 4.1', 'Working', 'Together!!'];
-    });
+angular.module('AngularRails').controller('HomeCtrl', ['$scope', function ($scope) {
+  $scope.things = ['Angular', 'Rails 4.1', 'Working', 'Together!!'];
+}]);
