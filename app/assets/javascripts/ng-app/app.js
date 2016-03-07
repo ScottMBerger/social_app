@@ -1,4 +1,4 @@
-angular.module('AngularRails', ['ngRoute','templates'])
+angular.module('AngularRails', ['ngRoute','templates','Devise'])
   .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
       $routeProvider
           .when('/', {
