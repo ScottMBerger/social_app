@@ -20,6 +20,6 @@ angular.module('AngularRails').controller('HomeCtrl', HomeCtrl).
   }]);*/
 
 angular.module('AngularRails')
-    .controller('HomeCtrl', function ($scope) {
+    .controller('HomeCtrl', ['$scope', function ($scope) {
         $scope.things = ['Angular', 'Rails 4.1', 'Working', 'Together!!'];
-    });
+    }]);
