@@ -22,24 +22,20 @@ angular.module('AngularRails').controller('HomeCtrl', HomeCtrl).
 angular.module('AngularRails').controller('HomeCtrl', ['$scope', 'Auth', function ($scope, Auth) {
   $scope.things = ['Angular', 'Rails 4.1', 'Working', 'Together!!'];
   
-  var credentials = {
-      email: 'user@domain.com',
-      password: 'password1',
-      password_confirmation: 'password1'
-  };
   var config = {
-      headers: {
-          'X-HTTP-Method-Override': 'POST'
-      }
-  };
-  
-  Auth.register(credentials, config).then(function(registeredUser) {
-      console.log(registeredUser); // => {id: 1, ect: '...'}
-  }, function(error) {
-      // Registration failed...
-  });
-  
-  $scope.$on('devise:new-registration', function(event, user) {
-     console.log(user);
-  });
+            headers: {
+                'X-HTTP-Method-Override': 'DELETE'
+            }
+        };
+        // Log in user...
+        // ...
+        Auth.logout(config).then(function(oldUser) {
+            // alert(oldUser.name + "you're signed out now.");
+        }, function(error) {
+            // An error occurred logging out.
+        });
+
+        $scope.$on('devise:logout', function(event, oldCurrentUser) {
+            // ...
+        });
 }]);
