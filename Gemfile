@@ -11,6 +11,7 @@ gem 'sdoc',         '0.4.0', group: :doc
 gem 'devise'
 gem 'rails_admin'
 gem 'angular-rails-templates'
+gem 'materialize-sass'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
