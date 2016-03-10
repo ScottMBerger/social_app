@@ -22,4 +22,12 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.for(:sign_in) << :attribute
   # end
+  
+  def auth_options
+    super.merge(recall: "#{controller_path}#failure")
+  end
+  
+  def failure
+    render json: {error: "Login failed"}, status: :unauthorized
+  end
 end

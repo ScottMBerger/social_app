@@ -23,12 +23,40 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Au
   $scope.slogan = 'A site for social network aggregation';
   $scope.newUser = {};
   $scope.user = {};
-  
+  $scope.currentUser = null;
+
   var config = {
       headers: {
           'X-HTTP-Method-Override': 'POST'
       }
   };
+  
+  Auth.currentUser().then(function(user) {
+    $scope.currentUser = user.username;
+    console.log(user.username);
+    console.log(user);
+  }, function(error) {
+      console.log(error);
+  });
+  
+  $scope.logout = function() {
+    Auth.logout(config).then(function(oldUser) {
+        $scope.currentUser = null;
+        console.log("logged out");
+        Materialize.toast('You have been logged out', 2000)
+    }, function(error) {
+        // An error occurred logging out.
+    });
+
+    $scope.$on('devise:logout', function(event, oldCurrentUser) {
+        // ...
+    });
+  }
+  
+  $scope.profile = function () {
+    $location.path('/' + $scope.currentUser);
+  }
+
       
   $scope.register = function() {
       var credentials = {
@@ -53,13 +81,13 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Au
   
   $scope.login = function() {
         var credentials = {
-            username: $scope.user.username,
+            login: $scope.user.username,
             password: $scope.user.password
         };
 
         Auth.login(credentials, config).then(function(user) {
             console.log(user); // => {id: 1, ect: '...'}
-            $location.path('/' + $scope.user.username);
+            $location.path('/' + user.username);
         }, function(error) {
             // Authentication failed...
         });
