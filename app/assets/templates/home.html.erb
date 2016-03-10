@@ -1,7 +1,84 @@
-<h1>The Home View!</h1>
-<ul>
-    <li ng-repeat="thing in things">
-        {{thing}}
-    </li>
-    <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
-</ul>
+
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center white-text">Social Count</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">{{slogan}}</h5>
+      </div>
+      <div class="row center">
+
+            <a class='btn' href='#modal1' modal enable-tabs="true">Get Started</a>
+
+
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+<div id="modal1" class="modal">
+    <ul class="tabs">
+    	<li class="tab"><a class="active" href="#login">LOGIN</a></li>
+    	<li class="tab"><a href="#signup">NEW USER</a></li>
+    </ul>
+    
+    
+    <div id="login">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" ng-model="user.username" id="user_username" class="validate" />
+                  <label for="useuser_usernamername">Username</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input autocomplete="off" type="password" ng-model="user.password" id="user_password" class="validate" />
+                  <label for="user_password">Password</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+              <a ng-click="login()" class="modal-action modal-close waves-effect waves-green btn-flat">Login</a>
+            </div>
+    </div>
+    
+    <div id="signup">
+      <div class="row">
+        <form class="col s12">
+            <div class="row">
+            <div class="input-field col s12">
+              <input type="email" value="" ng-model="newUser.email" id="user_email" class="validate" />
+              <label for="user_email">Email</label>
+            </div>
+          </div>
+            <div class="row">
+            <div class="input-field col s12">
+              <input type="text" ng-model="newUser.username" id="user_username" class="validate" />
+              <label for="useuser_usernamername">Username</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input autocomplete="off" type="password" ng-model="newUser.password" id="user_password" class="validate" />
+              <label for="user_password">Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input autocomplete="off" type="password" ng-model="newUser.passwordconfirmation" id="user_password_confirmation" class="validate" />
+              <label for="user_password_confirmation">Password confirmation</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <a ng-click="register()" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+        </div>
+    </div>
+    
+    
+</div>

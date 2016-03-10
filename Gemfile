@@ -18,6 +18,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-route'
   gem 'rails-assets-angular-resource'
   gem "rails-assets-angular-devise"
+  gem 'rails-assets-angular-materialize'
 end
 
 group :development, :test do

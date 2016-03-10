@@ -15,6 +15,9 @@ app.factory("User", function($resource, $routeParams) {
 
 app.controller('UserCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User){
   $scope.person = $routeParams.username;
-  $scope.users = User.show();
+
+  $scope.user = User.show();
+  
   $scope.num = 5;
 }]);
+

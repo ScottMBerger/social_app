@@ -1,4 +1,4 @@
-var app = angular.module('AngularRails', ['ngRoute','ngResource','templates','Devise']);
+var app = angular.module('AngularRails', ['ui.materialize','ngRoute','ngResource','templates','Devise']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -11,5 +11,6 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             controller: 'UserCtrl'
         });
     $locationProvider.html5Mode(true);
+    
+    
 }]);
-

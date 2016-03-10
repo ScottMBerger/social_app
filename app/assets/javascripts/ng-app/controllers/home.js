@@ -19,23 +19,58 @@ angular.module('AngularRails').controller('HomeCtrl', HomeCtrl).
     $scope.person = $routeParams.id
   }]);*/
 
-angular.module('AngularRails').controller('HomeCtrl', ['$scope', 'Auth', function ($scope, Auth) {
-  $scope.things = ['Angular', 'Rails 4.1', 'Working', 'Together!!'];
+angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Auth', function ($scope, $location, Auth) {
+  $scope.slogan = 'A site for social network aggregation';
+  $scope.newUser = {};
+  $scope.user = {};
   
   var config = {
-            headers: {
-                'X-HTTP-Method-Override': 'DELETE'
-            }
+      headers: {
+          'X-HTTP-Method-Override': 'POST'
+      }
+  };
+      
+  $scope.register = function() {
+      var credentials = {
+          username: $scope.newUser.username,
+          email: $scope.newUser.email,
+          password: $scope.newUser.password,
+          password_confirmation: $scope.newUser.passwordconfirmation
+      };
+      
+      Auth.register(credentials, config).then(function(registeredUser) {
+          console.log(registeredUser); // => {id: 1, ect: '...'}
+          $location.path('/' + $scope.newUser.username);
+      }, function(error) {
+          // Registration failed...
+      });
+
+      $scope.$on('devise:new-registration', function(event, user) {
+          
+      });
+      
+  };
+  
+  $scope.login = function() {
+        var credentials = {
+            username: $scope.user.username,
+            password: $scope.user.password
         };
-        // Log in user...
-        // ...
-        Auth.logout(config).then(function(oldUser) {
-            // alert(oldUser.name + "you're signed out now.");
+
+        Auth.login(credentials, config).then(function(user) {
+            console.log(user); // => {id: 1, ect: '...'}
+            $location.path('/' + $scope.user.username);
         }, function(error) {
-            // An error occurred logging out.
+            // Authentication failed...
         });
 
-        $scope.$on('devise:logout', function(event, oldCurrentUser) {
-            // ...
+        $scope.$on('devise:login', function(event, currentUser) {
+            // after a login, a hard refresh, a new tab
         });
+
+        $scope.$on('devise:new-session', function(event, currentUser) {
+            // user logged in by Auth.login({...})
+        });
+  }
+
 }]);
