@@ -19,7 +19,7 @@ angular.module('AngularRails').controller('HomeCtrl', HomeCtrl).
     $scope.person = $routeParams.id
   }]);*/
 
-angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Auth', function ($scope, $location, Auth) {
+angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$timeout', 'Auth', function ($scope, $location, $timeout, Auth) {
   $scope.slogan = 'A site for social network aggregation';
   $scope.newUser = {};
   $scope.user = {};
@@ -34,7 +34,7 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Au
   Auth.currentUser().then(function(user) {
     $scope.currentUser = user.username;
     console.log(user.username);
-    console.log(user);
+    console.log('checked auth');
   }, function(error) {
       console.log(error);
   });
@@ -43,7 +43,7 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Au
     Auth.logout(config).then(function(oldUser) {
         $scope.currentUser = null;
         console.log("logged out");
-        Materialize.toast('You have been logged out', 2000)
+        Materialize.toast('You have been logged out', 3000);
     }, function(error) {
         // An error occurred logging out.
     });
@@ -51,11 +51,11 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Au
     $scope.$on('devise:logout', function(event, oldCurrentUser) {
         // ...
     });
-  }
+  };
   
   $scope.profile = function () {
     $location.path('/' + $scope.currentUser);
-  }
+  };
 
       
   $scope.register = function() {
@@ -68,7 +68,13 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Au
       
       Auth.register(credentials, config).then(function(registeredUser) {
           console.log(registeredUser); // => {id: 1, ect: '...'}
-          $location.path('/' + $scope.newUser.username);
+          function registerDone() {
+            $('#loginModal').closeModal();
+            $location.path('/' + $scope.newUser.username);
+            Materialize.toast('Welcome, '+ $scope.newUser.username + '. Your account is ready to go.', 4000);
+          }
+          $timeout(registerDone, 1000);
+
       }, function(error) {
           // Registration failed...
       });
@@ -82,12 +88,15 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Au
   $scope.login = function() {
         var credentials = {
             login: $scope.user.username,
-            password: $scope.user.password
+            password: $scope.user.password,
+            remember_me: $scope.user.remember_me
         };
 
         Auth.login(credentials, config).then(function(user) {
             console.log(user); // => {id: 1, ect: '...'}
+            $('#loginModal').closeModal();
             $location.path('/' + user.username);
+            Materialize.toast("Welcome, " + user.username + ". You're logged in now.", 4000);
         }, function(error) {
             // Authentication failed...
         });
@@ -99,6 +108,6 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', 'Au
         $scope.$on('devise:new-session', function(event, currentUser) {
             // user logged in by Auth.login({...})
         });
-  }
+  };
 
 }]);

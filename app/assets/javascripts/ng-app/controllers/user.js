@@ -1,5 +1,4 @@
 
-
 app.factory("User", function($resource, $routeParams) {
   return $resource("/users/:username", { username: $routeParams.username },
     {
@@ -13,11 +12,13 @@ app.factory("User", function($resource, $routeParams) {
 });
 
 
-app.controller('UserCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User){
+app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', function($scope, $routeParams, User, Auth){
   $scope.person = $routeParams.username;
 
-  $scope.user = User.show();
+  User.show().$promise.then(function(data) {
+      $scope.goto = data.username ? 'self.html' : 'spectator.html';
+      $scope.user = data;
+  });
   
-  $scope.num = 5;
 }]);
 
