@@ -98,7 +98,7 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$t
             $location.path('/' + user.username);
             Materialize.toast("Welcome, " + user.username + ". You're logged in now.", 4000);
         }, function(error) {
-            // Authentication failed...
+            Materialize.toast("Login info doesn't match, retry", 4000);
         });
 
         $scope.$on('devise:login', function(event, currentUser) {
@@ -109,5 +109,30 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$t
             // user logged in by Auth.login({...})
         });
   };
+  
+
+ 
+  $scope.reset = function() {
+        if (!$scope.user.username) {
+          Materialize.toast("Please enter an Email or Username", 3000);
+          return;
+        }
+        var parameters = {
+            login: $scope.user.username
+        };
+
+        Auth.sendResetPasswordInstructions(parameters).then(function(data) {
+            console.log(data);
+            Materialize.toast("An email was sent, please check it to reset password", 4000);
+         }, function(error) {
+            console.log(error);
+            Materialize.toast("Login info not found, please retry", 3000);
+        });
+
+        
+        $scope.$on('devise:send-reset-password-instructions-successfully', function(event) {
+           
+        });
+  }  
 
 }]);

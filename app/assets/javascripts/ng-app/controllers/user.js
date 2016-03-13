@@ -19,6 +19,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', function($
       $scope.goto = data.username ? 'self.html' : 'spectator.html';
       $scope.user = data;
   });
-  
+
+        
 }]);
 

@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-angular'
+  gem 'rails-assets-angular-route'
+  gem 'rails-assets-angular-resource'
+  gem "rails-assets-angular-devise"
+  gem 'rails-assets-angular-materialize'
+end
+
+
 gem 'bundler', '>= 1.8.4'
 gem 'rails',        '4.2.2'
 gem 'sass-rails',   '5.0.2'
@@ -13,13 +22,6 @@ gem 'rails_admin'
 gem 'angular-rails-templates'
 gem 'materialize-sass'
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-angular'
-  gem 'rails-assets-angular-route'
-  gem 'rails-assets-angular-resource'
-  gem "rails-assets-angular-devise"
-  gem 'rails-assets-angular-materialize'
-end
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

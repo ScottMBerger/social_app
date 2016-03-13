@@ -16,9 +16,14 @@
 
 @import "materialize/components/color";
 $primary-color: color("blue", "lighten-2") !default;
-$secondary-color: color("red", "lighten-1") !default;
+$secondary-color: color("amber", "lighten-1") !default;
 @import 'materialize';
 
+
 body {
-    background-image: image-url("bg.jpg");
+    background-color: #000a1a ;
+}
+
+h5, h1 {
+    color: white;
 }
