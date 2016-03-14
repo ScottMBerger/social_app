@@ -1,6 +1,6 @@
 <header>
   <a class='dropdown-button btn-flat btn-large'  data-activates='settings' dropdown data-hover="false"  data-beloworigin="true" data-constrainwidth="false" data-outduration="600">
-      <i class="large mdi-navigation-menu    white-text"></i>
+      <i class="large mdi-navigation-menu white-text"></i>
   </a>
 
   <ul id='settings' class='dropdown-content'>
@@ -25,6 +25,58 @@
 <h1>{{person}}</h1>
 
 <p ng-if="mode">{{user}}</p>
-<p ng-if="!mode">Minimilist Mode</p>
+<div ng-if="!mode">
+  <p>Minimilist Mode</p>
 
-<p>{{num}}</p>
+<div class="counterclass">
+  <ul style="list-style-type:none">
+		<li class='olist'>
+			<div class="odometer">
+				<ul class="digits">
+					<li class="digit" ng-repeat="n in counterLength track by $index">
+						<span class="cou-item">
+							<ul>
+								<li ng-repeat="n in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] track by $index">{{n}}</li>
+							</ul>
+						</span>
+					</li>
+
+					<li class="digit"><i class="fa fa-socialcount"></i></li>
+				</ul>
+			</div>
+		</li>
+		<li class='olist'>
+			<div class="odometer">
+				<ul class="digits">
+					<li class="digit" ng-repeat="n in counterLength track by $index">
+						<span class="cou-item">
+							<ul>
+								<li ng-repeat="n in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] track by $index">{{n}}</li>
+							</ul>
+						</span>
+					</li>
+
+					<li class="digit"><i class="fa fa-youtube"></i></li>
+				</ul>
+			</div>
+		</li>
+		<li class='olist'>
+			<div class="odometer">
+				<ul class="digits">
+					<li class="digit" ng-repeat="n in counterLength track by $index">
+						<span class="cou-item">
+							<ul>
+								<li ng-repeat="n in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] track by $index">{{n}}</li>
+							</ul>
+						</span>
+					</li>
+
+					<li class="digit"><i class="fa fa-twitter"></i></li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+	
+	<!--<button ng-click="okgo();">Increment</button> count: <span id="sprouto">{{count}}</span>-->
+</div>
+</div>

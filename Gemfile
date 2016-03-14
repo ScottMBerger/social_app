@@ -21,6 +21,7 @@ gem 'devise'
 gem 'rails_admin'
 gem 'angular-rails-templates'
 gem 'materialize-sass'
+gem "font-awesome-rails"
 
 
 group :development, :test do

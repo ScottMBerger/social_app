@@ -18,12 +18,12 @@
 $primary-color: color("blue", "lighten-2") !default;
 $secondary-color: color("amber", "lighten-1") !default;
 @import 'materialize';
-
+@import "font-awesome";
 
 body {
     background-color: #000a1a ;
 }
 
-h5, h1 {
+h5, h1, p {
     color: white;
 }

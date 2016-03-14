@@ -1,3 +1,103 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.counterclass {
+  font-family: 'Jura', sans-serif;
+
+  margin-top: 100px;
+  text-align: center;
+  color: #fff;
+}
+.odometer {
+  color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #fff;
+  border-radius: 4px;
+}
+.odometer ul.digits {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+}
+.odometer ul.digits li.digit {
+  position: relative;
+  float: left;
+  background-color: transparent;
+  font-size: 2em;
+  min-width: 2em;
+  min-height: 2em;
+  line-height: 2em;
+}
+.odometer ul.digits li.digit .cou-item ul {
+  position: absolute;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  left: 0px;
+  top: 0px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform: translate(0, 0em);
+          transform: translate(0, 0em);
+  -webkit-transition: all 1s cubic-bezier(0, 1.2, 1, 1.2);
+  transition: all 1s cubic-bezier(0, 1.2, 1, 1.2);
+}
+.odometer ul.digits li.digit .cou-item ul.goto-5 {
+  -webkit-transform: translateY(-10em);
+          transform: translateY(-10em);
+}
+.odometer ul.digits li.digit .cou-item ul li {
+  display: block;
+
+  min-width: 2em;
+  min-height: 2em;
+  line-height: 2em;
+}
+.goto-0 {
+  -webkit-transform: translateY(-0em) !important;
+          transform: translateY(-0em) !important;
+}
+.goto-1 {
+  -webkit-transform: translateY(-2em) !important;
+          transform: translateY(-2em) !important;
+}
+.goto-2 {
+  -webkit-transform: translateY(-4em) !important;
+          transform: translateY(-4em) !important;
+}
+.goto-3 {
+  -webkit-transform: translateY(-6em) !important;
+          transform: translateY(-6em) !important;
+}
+.goto-4 {
+  -webkit-transform: translateY(-8em) !important;
+          transform: translateY(-8em) !important;
+}
+.goto-5 {
+  -webkit-transform: translateY(-10em) !important;
+          transform: translateY(-10em) !important;
+}
+.goto-6 {
+  -webkit-transform: translateY(-12em) !important;
+          transform: translateY(-12em) !important;
+}
+.goto-7 {
+  -webkit-transform: translateY(-14em) !important;
+          transform: translateY(-14em) !important;
+}
+.goto-8 {
+  -webkit-transform: translateY(-16em) !important;
+          transform: translateY(-16em) !important;
+}
+.goto-9 {
+  -webkit-transform: translateY(-18em) !important;
+          transform: translateY(-18em) !important;
+}
+
+.olist:not(:last-child) {
+    margin-bottom: 25px;
+}

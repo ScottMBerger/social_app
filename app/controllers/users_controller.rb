@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def show
     @user = User.where("lower(username) = ?", params[:username].downcase).first
     if @user
+      User.increment_counter(:view_count, @user.id)
       if current_user && current_user.id == @user.id
         render json: @user
       else
