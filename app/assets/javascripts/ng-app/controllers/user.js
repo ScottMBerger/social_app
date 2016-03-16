@@ -12,13 +12,23 @@ app.factory("User", function($resource, $routeParams) {
 });
 
 
-app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', function($scope, $routeParams, User, Auth){
+app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', function($scope, $routeParams, User, Auth, $http){
   $scope.person = $routeParams.username;
 
   User.show().$promise.then(function(data) {
       $scope.goto = data.username ? 'self.html' : 'spectator.html';
       $scope.user = data;
       
+      
+      
+      $http({
+        method: 'GET',
+        url: 'https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mySubscribers=true&key={x67yDqjfYgDyxH12dSjFztaP}'
+      }).then(function successCallback(response) {
+          console.log(response);
+        }, function errorCallback(response) {
+          console.log(response);
+        });
       if ($scope.user.username) {
         function pad(n, width, z) {
       	  z = z || '0';

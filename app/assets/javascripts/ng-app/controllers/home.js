@@ -19,7 +19,9 @@ angular.module('AngularRails').controller('HomeCtrl', HomeCtrl).
     $scope.person = $routeParams.id
   }]);*/
 
-angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$timeout', 'Auth', function ($scope, $location, $timeout, Auth) {
+
+
+angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$timeout', 'Auth', '$http', function ($scope, $location, $timeout, Auth, $http) {
   $scope.slogan = 'A site for social network aggregation';
   $scope.newUser = {};
   $scope.user = {};
@@ -31,13 +33,16 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$t
       }
   };
   
-  Auth.currentUser().then(function(user) {
-    $scope.currentUser = user.username;
-    console.log(user.username);
-    console.log('checked auth');
-  }, function(error) {
-      console.log(error);
-  });
+  function checkLogin() {
+    Auth.currentUser().then(function(user) {
+      $scope.currentUser = user.username;
+      console.log(user.username);
+      console.log('checked auth');
+    }, function(error) {
+        console.log(error);
+    });
+  };
+  checkLogin();
   
   $scope.logout = function() {
     Auth.logout(config).then(function(oldUser) {
@@ -101,15 +106,14 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$t
             Materialize.toast("Login info doesn't match, retry", 4000);
         });
 
-        $scope.$on('devise:login', function(event, currentUser) {
-            // after a login, a hard refresh, a new tab
-        });
+        
 
-        $scope.$on('devise:new-session', function(event, currentUser) {
-            // user logged in by Auth.login({...})
-        });
+        
   };
-  
+  $scope.$on('devise:login', function(event, currentUser) {
+     console.log(event);
+     console.log(currentUser);
+  });
 
  
   $scope.reset = function() {
@@ -135,4 +139,20 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$t
         });
   }  
 
+   $scope.handlePopupAuthentication = function handlePopupAuthentication(network, account) {
+      console.log(network);
+      console.log(account);
+      $scope.login();
+      checkLogin();
+   }
+
+   $scope.authNetwork = function authNetwork(network) {
+      var openUrl = 'users/auth/' + network;
+      window.$windowScope = $scope;
+      window.open(openUrl, "Authenticate Account", "width=500, height=500");
+   };
+   
+   $scope.$on('devise:new-session', function(event, currentUser) {
+           console.log("new session");
+        });
 }]);

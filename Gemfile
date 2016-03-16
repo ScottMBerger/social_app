@@ -22,7 +22,9 @@ gem 'rails_admin'
 gem 'angular-rails-templates'
 gem 'materialize-sass'
 gem "font-awesome-rails"
-
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem "omniauth-google-oauth2"
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

@@ -39,6 +39,13 @@
                 <button type="submit" class="modal-action waves-effect waves-light btn" >CEATE ACCOUNT</button>
               </div>
           </div>
+          <div class="row">
+              <div class="center-align col s12">
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')"><i class="fa fa-twitter"></i></span>
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')"><i class="fa fa-google"></i></span>
+              </div>
+          </div>
+          
         </form>
       </div>
     
@@ -68,9 +75,16 @@
                     <a ng-click="reset()" class='waves-effect waves-light'>Forgot Password?</a>
                 </div>
               </div>
+          
             <div class="row">
               <div class="center-align col s12">
                 <button type="submit" class="modal-action waves-effect waves-light btn" >SIGN IN</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="center-align col s12">
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')"><i class="fa fa-twitter"></i></span>
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')"><i class="fa fa-google"></i></span>
               </div>
             </div>
         </form>

@@ -37,10 +37,25 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :test
-  host = 'app-scottmberger-1.c9users.io'
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-
+  #config.action_mailer.delivery_method = :test
+  #host = 'app-scottmberger-1.c9users.io'
+  #config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  
+  config.app_domain = 'app-scottmberger-1.c9users.io'
+  
+  # Email
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: config.app_domain }
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com', 
+    port: '587',
+    enable_starttls_auto: true,
+    user_name: 'someuser',
+    password: 'somepass',
+    authentication: :plain,
+    domain: 'app-scottmberger-1.c9users.io'
+  }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
