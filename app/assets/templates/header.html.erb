@@ -1,0 +1,28 @@
+<header ng-controller="HomeCtrl" class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="left">
+        <a id="logo-container" href="/" class="brand-logo">SocialCount</a>
+      </div>
+      <div class="right" ng-if="currentUser"> 
+        <!-- Dropdown Trigger -->
+        <a class='dropdown-button waves-effect waves-light btn' data-activates='demoDropdown' dropdown data-hover="false" data-beloworigin="true">
+            {{currentUser}}
+        </a>
+        
+        <!-- Dropdown Structure -->
+        <ul id='demoDropdown' class='dropdown-content'>
+            <li><a ng-click="profile()" class='waves-effect waves-light'>Profile</a></li>
+            <li><a ng-click="logout()" class='waves-effect waves-light'>Log Out</a></li>
+        </ul>
+      </div>
+      <div class="right" ng-if="!currentUser">
+          <a class='waves-effect waves-light btn' href='#loginModal' modal open="false" enable-tabs="true">Login</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div ng-include="'signup.html'"></div>
+  </div>
+</header>

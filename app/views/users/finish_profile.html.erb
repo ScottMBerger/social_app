@@ -1,0 +1,9 @@
+<p>This view will now self-destruct <%= current_user %></p>
+<script>
+   try {
+       <%= @provider %>
+       <%= @user %>
+      window.opener.$windowScope.handlePopupAuthentication('profile', '<%= current_user %>');
+   } catch(err) {}
+  //window.close();
+</script>
