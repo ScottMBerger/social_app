@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = 'change@me'
+  TEMP_USER_PREFIX = 'changeme'
   TEMP_EMAIL_REGEX = /\Achange@me/
 
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -45,7 +46,8 @@ class User < ActiveRecord::Base
       if user.nil?
         user = User.new(
           #name: auth.extra.raw_info.name,
-          username: auth.info.nickname || auth.uid,
+          username: auth.info.nickname ? auth.info.nickname : "#{TEMP_USER_PREFIX}#{auth.uid}",
+          profile_set: 'no',
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
@@ -67,13 +69,13 @@ class User < ActiveRecord::Base
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
 
-    def login=(login)
-      @login = login
-    end
-  
-    def login
-      @login || self.username || self.email
-    end
+  def login=(login)
+    @login = login
+  end
+
+  def login
+    @login || self.username || self.email
+  end
   
   private
     def self.find_first_by_auth_conditions(warden_conditions)

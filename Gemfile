@@ -4,6 +4,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
   gem 'rails-assets-angular-route'
   gem 'rails-assets-angular-resource'
+  gem 'rails-assets-angular-animate'
   gem "rails-assets-angular-devise"
   gem 'rails-assets-angular-materialize'
 end
@@ -25,6 +26,8 @@ gem "font-awesome-rails"
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem "omniauth-google-oauth2"
+gem 'omniauth-facebook'
+gem 'omniauth-instagram'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

@@ -1,4 +1,4 @@
-var app = angular.module('AngularRails', ['ui.materialize','ngRoute','ngResource','templates','Devise']);
+var app = angular.module('AngularRails', ['ui.materialize','ngRoute','ngResource','templates','Devise','ngAnimate']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider

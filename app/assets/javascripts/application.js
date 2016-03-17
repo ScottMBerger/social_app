@@ -16,6 +16,7 @@
 //= require angular
 //= require angular-route
 //= require angular-resource
+//= require angular-animate
 //= require angular-materialize
 //= require angular-rails-templates
 //= require angular-devise

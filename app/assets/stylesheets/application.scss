@@ -21,9 +21,34 @@ $secondary-color: color("amber", "lighten-1") !default;
 @import "font-awesome";
 
 body {
-    background-color: #000a1a ;
+    background-color: #000a1a;
+    overflow-x:hidden;
 }
 
 h5, h1, p {
     color: white;
+}
+
+.slide {
+    position: absolute;
+
+    width: 100%;
+
+}
+.slide.ng-enter,
+.slide.ng-leave {
+    -webkit-transition: all 1.4s ease;
+    transition: all 1.4s ease;
+}
+.slide.ng-enter {
+    left: 100%;
+}
+.slide.ng-enter-active {
+    left: 0;
+}
+.slide.ng-leave {
+    left: 0;
+}
+.slide.ng-leave-active {
+    left: -100%;
 }

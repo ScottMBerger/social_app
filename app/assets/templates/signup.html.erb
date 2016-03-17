@@ -5,8 +5,16 @@
     	<li class="tab waves-effect waves-light"><a href="#login">LOGIN</a></li>
     	<li class="tab waves-effect waves-light"><a href="#signup">NEW USER</a></li>
     </ul>
-    
-    <div id="signup" class="container">
+    <div ng-if="profile_set">
+      <div id="signup" class="container">
+        You need a username
+      </div>
+      <div id="login" class="container">
+        You need a username2
+      </div>
+    </div>
+    <div ng-if="!profile_set">
+      <div id="signup" class="container">
         <form class="col s12" ng-submit="register()">
 
             <div class="row">
@@ -42,6 +50,7 @@
           <div class="row">
               <div class="center-align col s12">
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')"><i class="fa fa-twitter"></i></span>
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('facebook')"><i class="fa fa-facebook"></i></span>
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')"><i class="fa fa-google"></i></span>
               </div>
           </div>
@@ -84,10 +93,14 @@
             <div class="row">
               <div class="center-align col s12">
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')"><i class="fa fa-twitter"></i></span>
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('facebook')"><i class="fa fa-facebook"></i></span>
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')"><i class="fa fa-google"></i></span>
               </div>
             </div>
         </form>
     </div>
+    </div>
     
 </div>
+
+      

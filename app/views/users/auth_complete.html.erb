@@ -1,9 +1,9 @@
-<p>This view will now self-destruct</p>
+<p>This view will now self-destruct <%= current_user.profile_set %></p>
 <script>
    try {
-       <%= @provider %>
-       <%= @user %>
-      window.opener.$windowScope.handlePopupAuthentication('<%= @provider %>', <%= @user.to_json.html_safe %>);
-   } catch(err) {}
-  window.close();
+      window.opener.$windowScope.handlePopupAuthentication('<%= current_user %>');
+   } catch(err) {
+      console.log(err);
+   }
+  //window.close();
 </script>

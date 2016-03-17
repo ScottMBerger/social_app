@@ -105,10 +105,6 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$t
         }, function(error) {
             Materialize.toast("Login info doesn't match, retry", 4000);
         });
-
-        
-
-        
   };
   $scope.$on('devise:login', function(event, currentUser) {
      console.log(event);
@@ -139,11 +135,15 @@ angular.module('AngularRails').controller('HomeCtrl', ['$scope','$location', '$t
         });
   }  
 
-   $scope.handlePopupAuthentication = function handlePopupAuthentication(network, account) {
-      console.log(network);
+   $scope.handlePopupAuthentication = function handlePopupAuthentication(account) {
       console.log(account);
-      $scope.login();
-      checkLogin();
+      if (account.profile_set != 'yes') {
+        $scope.profile_set = true;
+        $scope.$apply();
+      } else {
+        $scope.login();
+        checkLogin();
+      }
    }
 
    $scope.authNetwork = function authNetwork(network) {

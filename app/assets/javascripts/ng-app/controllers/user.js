@@ -14,7 +14,13 @@ app.factory("User", function($resource, $routeParams) {
 
 app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', function($scope, $routeParams, User, Auth, $http){
   $scope.person = $routeParams.username;
-
+  $scope.loadDone = false;
+  setTimeout(function(){
+		$scope.loadDone = true;
+		console.log("istrue");
+		$scope.$apply();
+	}, 2500);
+      		
   User.show().$promise.then(function(data) {
       $scope.goto = data.username ? 'self.html' : 'spectator.html';
       $scope.user = data;

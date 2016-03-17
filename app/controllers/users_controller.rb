@@ -60,6 +60,18 @@ class UsersController < ApplicationController
     end
   end
   
+  def set_profile_path
+    if request.patch? && params[:user] #&& params[:user][:email]
+      @user = User.find params[:id]
+      if @user.update(user_params)
+        #@user.skip_reconfirmation!
+        sign_in(@user, :bypass => true)
+        render @user
+      else
+        @show_errors = true
+      end
+    end
+  end
   def auth_complete
     # authorize! :update, @user 
     if request.patch? && params[:user] #&& params[:user][:email]
