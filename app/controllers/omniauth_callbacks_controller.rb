@@ -20,12 +20,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(resource)
-    if resource.email_verified?
-      logger.info "after_sign_in_path_for: #{resource.profile_set}"
+    #if resource.email_verified?
+      #logger.info "after_sign_in_path_for: #{resource.profile_set}"
       auth_complete_path(resource)
-    else
-      finish_signup_path(resource)
-    end
+    #else
+    #  finish_signup_path(resource)
+    #end
   end
 end
 

@@ -24,7 +24,19 @@
 <h1>The Self View!</h1>
 <h1>{{person}}</h1>
 
-<p ng-if="mode">{{user}}</p>
+<div ng-if="mode">
+	<p>{{advanced}}</p>
+
+
+      	<ul>
+	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('twitter') >= 0}" ng-click="authNetworkAdd('twitter')">Link Twitter <i class="fa fa-twitter"></i></span></li>
+	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('facebook') >= 0}" ng-click="authNetworkAdd('facebook')">Link Facebook <i class="fa fa-facebook"></i></span></li>
+	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('google_oauth2') >= 0}" ng-click="authNetworkAdd('google_oauth2')">Link Google <i class="fa fa-google"></i></span></li>
+	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('instagram') >= 0}" ng-click="authNetworkAdd('instagram')">Link Instagram <i class="fa fa-instagram"></i></span></li>
+      	</ul>
+        
+   
+</div>
 <div ng-if="!mode">
   <p>Minimilist Mode</p>
 

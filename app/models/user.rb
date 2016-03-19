@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :identities, dependent: :destroy
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_USER_PREFIX = 'changeme'
   TEMP_EMAIL_REGEX = /\Achange@me/
@@ -20,8 +21,8 @@ class User < ActiveRecord::Base
   :uniqueness => {
     :case_sensitive => false
   }
-   def self.find_for_oauth(auth, signed_in_resource = nil)
 
+   def self.find_for_oauth(auth, signed_in_resource = nil)
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
 
@@ -47,8 +48,9 @@ class User < ActiveRecord::Base
         user = User.new(
           #name: auth.extra.raw_info.name,
           username: auth.info.nickname ? auth.info.nickname : "#{TEMP_USER_PREFIX}#{auth.uid}",
-          profile_set: 'no',
+          profile_set: auth.info.nickname ? 'yes' : 'no',
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+          email_set: email ? 'yes' : 'no',
           password: Devise.friendly_token[0,20]
         )
         #user.skip_confirmation!

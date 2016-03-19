@@ -1,67 +1,103 @@
-
-
 <div id="loginModal" class="modal">
+  
     <ul class="tabs" style="overflow:hidden;">
     	<li class="tab waves-effect waves-light"><a href="#login">LOGIN</a></li>
     	<li class="tab waves-effect waves-light"><a href="#signup">NEW USER</a></li>
     </ul>
-    <div ng-if="profile_set">
-      <div id="signup" class="container">
-        You need a username
-      </div>
-      <div id="login" class="container">
-        You need a username2
-      </div>
-    </div>
-    <div ng-if="!profile_set">
-      <div id="signup" class="container">
-        <form class="col s12" ng-submit="register()">
 
-            <div class="row">
-                <div class="input-field col s12">
-                  <input type="email" value="" ng-model="newUser.email" id="user_email" class="validate" required>
-                  <label for="user_email">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                  <input type="text" ng-model="newUser.username" id="user_username" class="validate" required>
-                  <label for="useuser_usernamername">Username</label>
-                </div>
-            </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input autocomplete="off" type="password" ng-model="newUser.password" id="user_password" class="validate" required>
-              <label for="user_password">Password</label>
-            </div>
+    <div id="signup" class="container">
+        <form class="col s12" ng-submit="updateUser()" ng-if="profile_set || email_set" ng-controller="UpdateCtrl">
+            <h2>One last step to set up your account.</h2>
+          <div class="row" ng-if="profile_set">
+              
+              <!--</h2>siteurl.com/{{profileName}}</h2>-->
+              <h2>{{updateName}}</h2>
+              <div class="input-field col s12">
+                <input type="text" ng-model="update.name" id="user_username" class="validate" required>
+                <label for="user_username" >Profile Name</label>
+              </div>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input autocomplete="off" type="password" ng-model="newUser.passwordconfirmation" id="user_password_confirmation" class="validate" required>
-              <label for="user_password_confirmation">Password confirmation</label>
-            </div>
-          </div>
-          
-          <div class="row">
-              <div class="center-align col s12">
-                <button type="submit" class="modal-action waves-effect waves-light btn" >CEATE ACCOUNT</button>
+          <div class="row" ng-if="email_set">
+              
+              <div class="input-field col s12">
+                <input type="email" ng-model="update.email" id="user_email" class="validate"  required>
+                <label for="user_username" >Email</label>
               </div>
           </div>
           <div class="row">
               <div class="center-align col s12">
-                <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')"><i class="fa fa-twitter"></i></span>
-                <span class="btn dash-subs login-btn" ng-click="authNetwork('facebook')"><i class="fa fa-facebook"></i></span>
-                <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')"><i class="fa fa-google"></i></span>
+                <button type="submit" class="modal-action waves-effect waves-light btn" >CONFIRM</button>
               </div>
           </div>
-          
-        </form>
-      </div>
-    
+      </form>
+        <form class="col s12" ng-submit="register()" ng-if="!profile_set && !email_set">
+          <div class="row">
+              <div class="input-field col s12">
+                <input type="email" value="" ng-model="newUser.email" id="user_email" class="validate" required>
+                <label for="user_email">Email</label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="input-field col s12">
+                <input type="text" ng-model="newUser.username" id="user_username" class="validate" required>
+                <label for="user_username">Username</label>
+              </div>
+          </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input autocomplete="off" type="password" ng-model="newUser.password" id="user_password" class="validate" required>
+            <label for="user_password">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input autocomplete="off" type="password" ng-model="newUser.passwordconfirmation" id="user_password_confirmation" class="validate" required>
+            <label for="user_password_confirmation">Password confirmation</label>
+          </div>
+        </div>
         
+        <div class="row">
+            <div class="center-align col s12">
+              <button type="submit" class="modal-action waves-effect waves-light btn" >CEATE ACCOUNT</button><span>{{regError}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="center-align col s12">
+              <span class="btn dash-subs login-btn" ng-click="authNetwork('instagram')"><i class="fa fa-instagram"></i></span>
+              <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')"><i class="fa fa-twitter"></i></span>
+              <span class="btn dash-subs login-btn" ng-click="authNetwork('facebook')"><i class="fa fa-facebook"></i></span>
+              <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')"><i class="fa fa-google"></i></span>
+            </div>
+        </div>
+        
+      </form>
+    </div>
+    
     <div id="login" class="container">
-        <form class="col s12" ng-submit="login()">
-            
+        <form class="col s12" ng-submit="updateUser()"  ng-if="profile_set || email_set" ng-controller="UpdateCtrl">
+              <h2>One last step to set up your account.</h2>
+            <div class="row" ng-if="profile_set">
+                
+                <!--</h2>siteurl.com/{{profileName}}</h2>-->
+                <div class="input-field col s12">
+                  <input type="text" ng-model="update.name" id="user_username" class="validate" required>
+                  <label for="user_username" >Profile Name</label>
+                </div>
+            </div>
+            <div class="row" ng-if="email_set">
+                
+                <div class="input-field col s12">
+                  <input type="email" ng-model="update.email" id="user_email" class="validate"  required>
+                  <label for="user_username" >Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="center-align col s12">
+                  <button type="submit" class="modal-action waves-effect waves-light btn" >CONFIRM</button>
+                </div>
+            </div>
+        </form>
+        <form class="col s12" ng-submit="login()" ng-if="!profile_set && !email_set">
               <div class="row">
                     <div class="input-field col s12">
                       <input type="text" ng-model="user.username" id="user_username" class="validate" required>
@@ -87,11 +123,12 @@
           
             <div class="row">
               <div class="center-align col s12">
-                <button type="submit" class="modal-action waves-effect waves-light btn" >SIGN IN</button>
+                <button type="submit" class="modal-action waves-effect waves-light btn" >SIGN IN</button><span>{{logError}}</span>
               </div>
             </div>
             <div class="row">
               <div class="center-align col s12">
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('instagram')"><i class="fa fa-instagram"></i></span>
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')"><i class="fa fa-twitter"></i></span>
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('facebook')"><i class="fa fa-facebook"></i></span>
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')"><i class="fa fa-google"></i></span>
@@ -99,8 +136,7 @@
             </div>
         </form>
     </div>
-    </div>
-    
+
 </div>
 
       

@@ -243,7 +243,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :twitter, "o11HVHhaHzfrnccFNcqQ8dgbl", "vrWHTQ3sUohfnYRvqZQ54PAy5Wpzr6g3WE3iSIDqw12FpU0JuJ"
   config.omniauth :facebook, "1773297706235070", "a85a45270c823f16510864c47663d1b4", scope: 'public_profile'
-  # config.omniauth :instagram, "o11HVHhaHzfrnccFNcqQ8dgbl", "vrWHTQ3sUohfnYRvqZQ54PAy5Wpzr6g3WE3iSIDqw12FpU0JuJ"
+  config.omniauth :instagram, "abd26fc0226340c0845c1b942dc8b46e", "4196a45611db4814a2c0cf26f680dac8"
   config.omniauth :google_oauth2, "74771105343-ph2blaqd1c4nr3iclk4imi40eeid33s8.apps.googleusercontent.com", "x67yDqjfYgDyxH12dSjFztaP"
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

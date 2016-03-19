@@ -1,9 +1,10 @@
-<p>This view will now self-destruct <%= current_user.profile_set %></p>
+<p>This view will now close</p>
+
 <script>
    try {
-      window.opener.$windowScope.handlePopupAuthentication('<%= current_user %>');
+      window.opener.$windowScope.handlePopupAuthentication('<%= current_user.to_json.html_safe %>');
    } catch(err) {
       console.log(err);
    }
-  //window.close();
+  window.close();
 </script>

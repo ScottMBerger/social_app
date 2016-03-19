@@ -2,6 +2,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
 
+  def update
+    @user = User.find(current_user.id)
+    logger.info "New article: #{params[:username]}"
+    logger.info "New article: #{params[:email]}"
+    if @user.update_attributes(user_paramsCorrect)
+      if params[:username]
+        @user.profile_set = 'yes'
+      end
+      if params[:email]
+        @user.email_set = 'yes'
+      end
+      @user.save
+      render json: '{"response": "updated"}'
+    else
+      render json: '{"response": "Error updating"}'
+    end
+  end
+  
+  private
+
+    def user_paramsCorrect
+      params.permit(:username, :email)
+    end
   # GET /resource/sign_up
   # def new
   #   super
@@ -57,4 +80,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
+  
 end

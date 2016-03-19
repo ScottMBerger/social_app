@@ -2,21 +2,25 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy, :finish_signup]
 
   def index
-    @users = User.all
-    render json: @users
+    @user = User.where("lower(username) = ?", params[:username].downcase).first
+    render json: @user
   end
   
-  def youtube
-    
-    render json: @list
+  def priverslist
+    @user = User.where("lower(username) = ?", params[:username].downcase).first
+    logger.info "DEBUG: #{@user.identities.map(&:provider)}"
+    render json: @user.identities.map(&:provider)
   end
+  
   # GET /users/:id.:format
   def show
     @user = User.where("lower(username) = ?", params[:username].downcase).first
+    logger.info "DEBUG: #{@user.identities.map(&:provider)}"
     if @user
       User.increment_counter(:view_count, @user.id)
       if current_user && current_user.id == @user.id
-        render json: @user
+        response = {user: @user, providers: @user.identities.map(&:provider)}
+        render json: response
       else
         render json: '{"response": "You are not this user"}'
       end
@@ -60,18 +64,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def set_profile_path
-    if request.patch? && params[:user] #&& params[:user][:email]
-      @user = User.find params[:id]
-      if @user.update(user_params)
-        #@user.skip_reconfirmation!
-        sign_in(@user, :bypass => true)
-        render @user
-      else
-        @show_errors = true
-      end
-    end
-  end
   def auth_complete
     # authorize! :update, @user 
     if request.patch? && params[:user] #&& params[:user][:email]

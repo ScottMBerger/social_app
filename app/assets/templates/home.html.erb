@@ -6,11 +6,9 @@
       <div class="row center">
         <h5 class="header col s12 light">{{slogan}}</h5>
       </div>
-      <div class="row center" ng-if="!currentUser">
-        <a class='waves-effect waves-light btn-large' href='#loginModal' modal open="false" enable-tabs="true">Get Started</a>
-      </div>
-      <div class="row center" ng-if="currentUser">
-        <a class='waves-effect waves-light btn-large' ng-click="profile()" >Get Started</a>
+      <div class="row center" >
+        <a class='waves-effect waves-light btn-large' ng-click="profile()" ng-lazy-show="currentUser">Get Started</a>
+        <a class='waves-effect waves-light btn-large' href='#loginModal' modal open="false" enable-tabs="true" ng-lazy-show="!currentUser">Get Started</a>
       </div>
       <br><br>
   </div>

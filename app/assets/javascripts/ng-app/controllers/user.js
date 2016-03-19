@@ -17,31 +17,44 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
   $scope.loadDone = false;
   setTimeout(function(){
 		$scope.loadDone = true;
-		console.log("istrue");
 		$scope.$apply();
+		Counter();
 	}, 2500);
       		
   User.show().$promise.then(function(data) {
-      $scope.goto = data.username ? 'self.html' : 'spectator.html';
-      $scope.user = data;
-      
-      
+      $scope.goto = data.user.username ? 'self.html' : 'spectator.html';
+      $scope.advanced = data;
+      $scope.user = data.user;
       
       $http({
         method: 'GET',
         url: 'https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mySubscribers=true&key={x67yDqjfYgDyxH12dSjFztaP}'
       }).then(function successCallback(response) {
-          console.log(response);
-        }, function errorCallback(response) {
-          console.log(response);
-        });
+        console.log(response);
+      }, function errorCallback(response) {
+        console.log(response);
+      });
+  });
+  
+  $scope.authNetworkAdd = function (network) {
+      if ($scope.advanced['providers'].indexOf(network) == -1) {
+        var openUrl = 'users/auth/' + network;
+        window.$windowScope = $scope;
+        window.open(openUrl, "Authenticate Account", "width=500, height=500");
+      }
+   };
+   
+  function Counter() {
       if ($scope.user.username) {
+        $scope.currentUser = $scope.user.username;
+        
         function pad(n, width, z) {
       	  z = z || '0';
       	  n = n + '';
       	  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
       	}
       	function adjust() {
+      	  console.log(adjust);
       		$('.cou-item').find('ul').each(function(i, el){
       			var val = pad($scope.count, $scope.length, 0).split("");
       			var $el = $(this);
@@ -57,6 +70,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
       		$scope.counterLength = new Array($scope.length);
       	}
       	function initCountNum(count) {
+      	  console.log('init');
       		$scope.count =  count;
       		correctLength(true);
       		
@@ -72,8 +86,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
       	
       	initCountNum($scope.user.view_count);      
       }
-  });
-
+  }
 
   
 }]);

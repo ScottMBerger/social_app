@@ -4,7 +4,7 @@
       <div class="left">
         <a id="logo-container" href="/" class="brand-logo">SocialCount</a>
       </div>
-      <div class="right" ng-if="currentUser"> 
+      <div class="right" ng-lazy-show="currentUser"> 
         <!-- Dropdown Trigger -->
         <a class='dropdown-button waves-effect waves-light btn' data-activates='demoDropdown' dropdown data-hover="false" data-beloworigin="true">
             {{currentUser}}
@@ -16,7 +16,7 @@
             <li><a ng-click="logout()" class='waves-effect waves-light'>Log Out</a></li>
         </ul>
       </div>
-      <div class="right" ng-if="!currentUser">
+      <div class="right" ng-lazy-show="!currentUser">
           <a class='waves-effect waves-light btn' href='#loginModal' modal open="false" enable-tabs="true">Login</a>
       </div>
     </div>

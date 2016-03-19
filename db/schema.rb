@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317161754) do
+ActiveRecord::Schema.define(version: 20160318032059) do
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160317161754) do
     t.string   "username"
     t.integer  "view_count",             default: 0,  null: false
     t.string   "profile_set"
+    t.string   "email_set"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
