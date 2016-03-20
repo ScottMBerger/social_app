@@ -1,11 +1,11 @@
 <div id="loginModal" class="modal">
   
-    <ul class="tabs" style="overflow:hidden;">
-    	<li class="tab waves-effect waves-light"><a href="#login">LOGIN</a></li>
-    	<li class="tab waves-effect waves-light"><a href="#signup">NEW USER</a></li>
+    <ul class="tabs" style="overflow:hidden;" ng-init="tab = 1">
+    	<li class="tab waves-effect waves-light"><a href="#login" ng-click="tab = 1">LOGIN</a></li>
+    	<li class="tab waves-effect waves-light"><a href="#signup" ng-click="tab = 2">NEW USER</a></li>
     </ul>
 
-    <div id="signup" class="container">
+    <div class="container" ng-lazy-show="tab == 2">
         <form class="col s12" ng-submit="updateUser()" ng-if="profile_set || email_set" ng-controller="UpdateCtrl">
             <h2>One last step to set up your account.</h2>
           <div class="row" ng-if="profile_set">
@@ -73,7 +73,7 @@
       </form>
     </div>
     
-    <div id="login" class="container">
+    <div class="container" ng-lazy-show="tab == 1">
         <form class="col s12" ng-submit="updateUser()"  ng-if="profile_set || email_set" ng-controller="UpdateCtrl">
               <h2>One last step to set up your account.</h2>
             <div class="row" ng-if="profile_set">

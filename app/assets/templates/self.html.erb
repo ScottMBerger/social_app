@@ -1,24 +1,23 @@
 <!--<header>-->
-  <a class='dropdown-button btn-flat btn-large'  data-activates='settings' dropdown data-hover="false"  data-beloworigin="true" data-constrainwidth="false" data-outduration="600">
+
+ 	<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large">
       <i class="large mdi-navigation-menu white-text"></i>
-  </a>
-
-  <ul id='settings' class='dropdown-content'>
-      <li class="switch">
-
-          <label>
-            Minimilist
-            <input type="checkbox" ng-model="mode" ng-init="mode = false">
-            <span class="lever"></span>
-            Advanced
-          </label>
-
-      
+    </a>
+    <ul>
+    	<li ng-click="mode = true"
+          <a class="btn-floating blue darken-1" tooltipped data-position="left" data-delay="40" data-tooltip="Link Accounts">
+      			<i class="large fa fa-link white-texte"></i>
+      		</a>
       </li>
-      <li><a href="javascript:void(0);">Link 2</a></li>
-  </ul>
-  
-   
+      <li ng-click="mode = !mode">
+      		<a class="btn-floating red" tooltipped data-position="left" data-delay="40" data-tooltip="Minimilist View">
+	      		<i class="large fa fa-exchange white-texte"></i>
+	      	</a>
+      </li>
+    </ul>
+  </div>
+        
 <!--</header>-->
 
 <h1>The Self View!</h1>
@@ -26,7 +25,6 @@
 
 <div ng-if="mode">
 	<p>{{advanced}}</p>
-
 
       	<ul>
 	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('twitter') >= 0}" ng-click="authNetworkAdd('twitter')">Link Twitter <i class="fa fa-twitter"></i></span></li>

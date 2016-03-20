@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
@@ -28,6 +29,7 @@ gem 'omniauth-twitter'
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
 gem 'omniauth-instagram'
+gem 'twitter'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

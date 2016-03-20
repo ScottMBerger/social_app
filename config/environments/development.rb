@@ -42,7 +42,8 @@ Rails.application.configure do
   #config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   
   config.app_domain = 'app-scottmberger-1.c9users.io'
-  
+
+
   # Email
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

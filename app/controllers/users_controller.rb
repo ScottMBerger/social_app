@@ -6,20 +6,33 @@ class UsersController < ApplicationController
     render json: @user
   end
   
-  def priverslist
-    @user = User.where("lower(username) = ?", params[:username].downcase).first
-    logger.info "DEBUG: #{@user.identities.map(&:provider)}"
-    render json: @user.identities.map(&:provider)
-  end
-  
   # GET /users/:id.:format
   def show
     @user = User.where("lower(username) = ?", params[:username].downcase).first
-    logger.info "DEBUG: #{@user.identities.map(&:provider)}"
+    
     if @user
+      
       User.increment_counter(:view_count, @user.id)
       if current_user && current_user.id == @user.id
+        twitClient = Twitter::REST::Client.new do |config|
+          config.consumer_key        = ENV['twitter_consumer_key']
+          config.consumer_secret     = ENV['twitter_consumer_secret']
+          config.access_token        = ENV['twitter_access_token']
+          config.access_token_secret = ENV['twitter_access_token_secret']
+        end
+        #twit = twitClient.user("kimkardashian")
+        #logger.info "TWITDEBUG: #{twit.followers_count}"
         response = {user: @user, providers: @user.identities.map(&:provider)}
+        
+        @user.identities.each do |identity|
+          if identity.provider == "twitter"
+            puts "Value of local variable is #{identity.uid}"
+            twit = twitClient.user(identity.uid.to_i)
+            puts "Value of local variable is #{twit.followers_count}"
+            response['twitter'] = twit.followers_count
+          end
+        end
+        
         render json: response
       else
         render json: '{"response": "You are not this user"}'

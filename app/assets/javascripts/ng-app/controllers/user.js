@@ -14,6 +14,7 @@ app.factory("User", function($resource, $routeParams) {
 
 app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', function($scope, $routeParams, User, Auth, $http){
   $scope.person = $routeParams.username;
+
   $scope.loadDone = false;
   setTimeout(function(){
 		$scope.loadDone = true;
@@ -22,6 +23,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
 	}, 2500);
       		
   User.show().$promise.then(function(data) {
+      console.log(data);
       $scope.goto = data.user.username ? 'self.html' : 'spectator.html';
       $scope.advanced = data;
       $scope.user = data.user;
