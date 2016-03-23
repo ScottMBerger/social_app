@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     :case_sensitive => false
   }
 
-   def self.find_for_oauth(auth, signed_in_resource = nil)
+  def self.find_for_oauth(auth, signed_in_resource = nil)
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
 
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     logger.info "New article: #{auth}"
     # Create the user if needed
     if user.nil?
-
+       
       # Get the existing user by email if the provider gives us a verified email.
       # If no verified email was provided we assign a temporary email and ask the
       # user to verify it on the next step via UsersController.finish_signup

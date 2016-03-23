@@ -44,7 +44,7 @@
 			<div class="odometer">
 				<ul class="digits">
 					<li class="digit" ng-repeat="n in counterLength track by $index">
-						<span class="cou-item">
+						<span class="cou-item profile_counter">
 							<ul>
 								<li ng-repeat="n in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] track by $index">{{n}}</li>
 							</ul>
@@ -55,11 +55,11 @@
 				</ul>
 			</div>
 		</li>
-		<li class='olist'>
+		<li class='olist' ng-if="advanced.networks.google">
 			<div class="odometer">
 				<ul class="digits">
 					<li class="digit" ng-repeat="n in counterLength track by $index">
-						<span class="cou-item">
+						<span class="cou-item google_counter">
 							<ul>
 								<li ng-repeat="n in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] track by $index">{{n}}</li>
 							</ul>
@@ -70,11 +70,11 @@
 				</ul>
 			</div>
 		</li>
-		<li class='olist'>
+		<li class='olist' ng-if="advanced.networks.twitter">
 			<div class="odometer">
 				<ul class="digits">
 					<li class="digit" ng-repeat="n in counterLength track by $index">
-						<span class="cou-item">
+						<span class="cou-item twitter_counter">
 							<ul>
 								<li ng-repeat="n in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] track by $index">{{n}}</li>
 							</ul>

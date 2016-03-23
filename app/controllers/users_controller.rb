@@ -11,31 +11,47 @@ class UsersController < ApplicationController
     @user = User.where("lower(username) = ?", params[:username].downcase).first
     
     if @user
-      
       User.increment_counter(:view_count, @user.id)
       if current_user && current_user.id == @user.id
-        twitClient = Twitter::REST::Client.new do |config|
-          config.consumer_key        = ENV['twitter_consumer_key']
-          config.consumer_secret     = ENV['twitter_consumer_secret']
-          config.access_token        = ENV['twitter_access_token']
-          config.access_token_secret = ENV['twitter_access_token_secret']
-        end
-        #twit = twitClient.user("kimkardashian")
-        #logger.info "TWITDEBUG: #{twit.followers_count}"
-        response = {user: @user, providers: @user.identities.map(&:provider)}
+        
+        response = {user: @user, providers: @user.identities.map(&:provider), networks: {}}
+        networks = {}
         
         @user.identities.each do |identity|
           if identity.provider == "twitter"
-            puts "Value of local variable is #{identity.uid}"
+            twitClient = Twitter::REST::Client.new do |config|
+              config.consumer_key        = ENV['twitter_consumer_key']
+              config.consumer_secret     = ENV['twitter_consumer_secret']
+              config.access_token        = ENV['twitter_access_token']
+              config.access_token_secret = ENV['twitter_access_token_secret']
+            end
+
+            ##puts "Value of local variable is #{identity.uid}"
             twit = twitClient.user(identity.uid.to_i)
-            puts "Value of local variable is #{twit.followers_count}"
-            response['twitter'] = twit.followers_count
+            #puts "Value of local variable is #{twit.followers_count}"
+            networks['twitter'] = twit.followers_count
+          elsif identity.provider == "google_oauth2"
+            Yt.configuration.api_key = ENV['Google_API_Key']
+
+            channel = Yt::Channel.new id: identity.extra
+            networks['google'] = channel.subscriber_count
           end
         end
-        
+        response['networks'] = networks
         render json: response
       else
-        render json: '{"response": "You are not this user"}'
+        puts "NOT USER"
+        response = {response: "You are not this user"}
+        networks = {}
+        @user.identities.each do |identity|
+          if identity.provider == "twitter"
+            networks['twitter'] = identity.extra
+          elsif identity.provider == "google_oauth2"
+            networks['google'] = identity.extra
+          end
+        end
+        response['networks'] = networks
+        render json: response
       end
     else
       render json: '{"response": "User does not exist"}'

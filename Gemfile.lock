@@ -283,6 +283,8 @@ GEM
       binding_of_caller (= 0.7.3.pre1)
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    yt (0.25.24)
+      activesupport
 
 PLATFORMS
   ruby
@@ -320,3 +322,4 @@ DEPENDENCIES
   twitter
   uglifier (= 2.5.3)
   web-console (= 2.0.0.beta3)
+  yt (~> 0.25.5)

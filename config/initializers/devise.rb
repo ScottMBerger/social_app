@@ -245,7 +245,7 @@ Devise.setup do |config|
   config.omniauth :twitter, ENV['OAuth_Key_Twitter'], ENV['OAuth_Secret_Twitter']
   config.omniauth :facebook, ENV['OAuth_Key_Facebook'], ENV['OAuth_Secret_Facebook'], scope: 'public_profile'
   config.omniauth :instagram, ENV['OAuth_Key_Instagram'], ENV['OAuth_Secret_Instagram']
-  config.omniauth :google_oauth2, ENV['OAuth_Key_Google'], ENV['OAuth_Secret_Google']
+  config.omniauth :google_oauth2, ENV['OAuth_Key_Google'], ENV['OAuth_Secret_Google'], {:scope => 'http://gdata.youtube.com,email,profile'}
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

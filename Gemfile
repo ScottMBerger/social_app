@@ -30,6 +30,7 @@ gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
 gem 'omniauth-instagram'
 gem 'twitter'
+gem 'yt', '~> 0.25.5'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

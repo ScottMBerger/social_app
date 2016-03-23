@@ -60,13 +60,10 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
         $scope.currentUser = null;
         console.log("logout()");
         checkLogin();
+        $location.path();
         Materialize.toast('You have been logged out', 3000);
     }, function(error) {
         console.log(error);
-    });
-
-    $scope.$on('devise:logout', function(event, oldCurrentUser) {
-        // ...
     });
   };
   

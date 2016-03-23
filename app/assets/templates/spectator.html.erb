@@ -1,5 +1,15 @@
 <h1>The Spactator View!</h1>
 
     <h1>{{person}}</h1>
-    <p>{{user}}</p>
-<p>{{num}}</p>
+    <p>{{data}}</p>
+
+
+<div ng-lazy-show="data.networks.google">
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <div class="g-ytsubscribe" data-channelid="{{data.networks.google}}" data-layout="full" data-theme="dark" data-count="hidden" data-onytevent="onYtEvent"></div>
+</div>
+
+<div ng-lazy-show="data.networks.twitter">
+    <a href="https://twitter.com/{{data.networks.twitter}}" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @{{data.networks.twitter}}</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
