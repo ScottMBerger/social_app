@@ -14,12 +14,17 @@ app.factory("User", function($resource, $routeParams) {
 
 app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', function($scope, $routeParams, User, Auth, $http){
   $scope.person = $routeParams.username;
-
+  
   $scope.loadDone = false;
   var networkCounters = [];
   var highestCount = 0;
+  var loginLoad = 0;
   
   function StartUser() {
+      loginLoad++;
+      if (loginLoad == 2) {
+        return;
+      }
       User.show().$promise.then(function(data) {
         if (data['user']) {
           console.log("this user is logged in");
@@ -55,7 +60,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
     });
   }
   StartUser();
-  
+  console.log("log111");
   $scope.authNetworkAdd = function (network) {
       if ($scope.advanced['providers'].indexOf(network) == -1) {
         var openUrl = 'users/auth/' + network;
@@ -110,6 +115,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
   });
   $scope.root.$on('devise:logout', function(event, oldCurrentUser) {
     console.log("logouton userjs");
+    loginLoad = -1;
     StartUser();
   });
   

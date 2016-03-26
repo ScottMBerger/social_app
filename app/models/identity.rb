@@ -14,6 +14,8 @@ class Identity < ActiveRecord::Base
       puts auth.info.nickname
       identity.extra = auth.info.nickname
       identity.save!
+    elsif auth.provider == "facebook" && identity && !identity.extra
+      puts auth
     end
     
     identity

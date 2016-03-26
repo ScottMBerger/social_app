@@ -40,7 +40,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
     Auth.currentUser().then(function(user) {
       if (user.profile_set == 'yes' && user.email_set == 'yes') {
          $scope.currentUser = user.username;
-        
+          
       } else {
         console.log('check not set');
         $scope.currentUser = null;
@@ -52,7 +52,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
         $scope.currentUser = null;
         console.log(error);
     });
-  };
+  }
   checkLogin();
   
   $scope.logout = function() {
@@ -112,9 +112,15 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
         Auth.login(credentials, config).then(function(user) {
             console.log(user); // => {id: 1, ect: '...'}
             $('#loginModal').closeModal();
-            $scope.currentUser = user.username;
+            if ($scope.currentUser) {
+              Materialize.toast("Account updated successfully", 4000);
+            } else {
+              $scope.currentUser = user.username;
+              Materialize.toast("Welcome, " + user.username + ". You're logged in now.", 4000);
+            }
+            
             $location.path('/' + user.username);
-            Materialize.toast("Welcome, " + user.username + ". You're logged in now.", 4000);
+            
         }, function(error) {
             $scope.logError = error.data.error;
             Materialize.toast("Login info doesn't match, retry", 4000);
@@ -144,13 +150,13 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
         $scope.$on('devise:send-reset-password-instructions-successfully', function(event) {
            
         });
-  }  
+  };
 
    $scope.handlePopupAuthentication = function handlePopupAuthentication(account) {
       account = angular.fromJson(account);
       console.log(account);
       $scope.newNeedChange = account.id;
-      continueLogin = true;
+      var continueLogin = true;
       
       if (account.email_set != 'yes') {
         $scope.email_set = true;
@@ -167,7 +173,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
         $scope.login();
         checkLogin();
       }
-   }
+   };
 
    $scope.authNetwork = function authNetwork(network) {
       var openUrl = 'users/auth/' + network;
