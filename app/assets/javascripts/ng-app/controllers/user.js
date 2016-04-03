@@ -112,6 +112,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
   $scope.root.$on('devise:login', function(event, currentUser) {
      console.log("loginon userjs");
      StartUser();
+     $scope.goto = 'self.html';
   });
   $scope.root.$on('devise:logout', function(event, oldCurrentUser) {
     console.log("logouton userjs");

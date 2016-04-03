@@ -1,27 +1,24 @@
-<h1>The Spactator View!</h1>
+<h1>Welcome to {{person}}'s profile page.</h1>
 
-    <h1>{{person}}</h1>
-    <p>{{data}}</p>
+    <p>Feel free to like or follow {{person}} on any of these social networks</p>
+    <!--<p>{{data}}</p>-->
 
-
-<div ng-lazy-show="data.networks.google">
-    <script src="https://apis.google.com/js/platform.js"></script>
-    <div class="g-ytsubscribe" data-channelid="{{data.networks.google}}" data-layout="full" data-theme="dark" data-count="hidden" data-onytevent="onYtEvent"></div>
-</div>
-
-<div ng-lazy-show="data.networks.twitter">
-    <a href="https://twitter.com/{{data.networks.twitter}}" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @{{data.networks.twitter}}</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</div>
-
-<div ng-lazy-show="data.networks.facebook">
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1773297706235070";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <div class="fb-follow" data-href="https://www.facebook.com/{{data.networks.facebook}}" data-layout="button" data-show-faces="true"></div>
-</div>
+<ul class="center">
+    <div ng-lazy-show="data.networks.google">
+        <script src="https://apis.google.com/js/platform.js"></script>
+        <li><span class="g-ytsubscribe" data-channelid="{{data.networks.google}}" data-layout="default" data-theme="dark" data-count="hidden" data-onytevent="onYtEvent">YouTube Subscribe <i class="fa fa-youtube"></i></span></li>
+    </div>
+    
+    <div ng-lazy-show="data.networks.twitter">
+        <li><a href="https://twitter.com/{{data.networks.twitter}}" class="login-btn twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @{{data.networks.twitter}}</a></li>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+    
+    <div ng-lazy-show="data.networks.instagram">
+        <li><span class="btn dash-subs login-btn linkButton disabled" tooltipped data-position="right" data-delay="40" data-tooltip="Coming Soon">Instagram Follow<i class="fa fa-instagram"></i></span></li>
+    </div>
+    
+    <div ng-lazy-show="data.networks.facebook">
+        <li><span class="btn dash-subs login-btn linkButton disabled" tooltipped data-position="right" data-delay="40" data-tooltip="Coming Soon">Facebook Follow<i class="fa fa-facebook"></i></span></li>
+    </div>
+</ul>

@@ -35,6 +35,10 @@ class UsersController < ApplicationController
 
             channel = Yt::Channel.new id: identity.extra
             networks['google'] = channel.subscriber_count
+          elsif identity.provider == "facebook"
+            networks['facebook'] = 12
+          elsif identity.provider == "instagram"
+            networks['instagram'] = 12
           end
         end
         response['networks'] = networks
@@ -48,6 +52,10 @@ class UsersController < ApplicationController
             networks['twitter'] = identity.extra
           elsif identity.provider == "google_oauth2"
             networks['google'] = identity.extra
+          elsif identity.provider == "instagram"
+            networks['instagram'] = 'na'
+          elsif identity.provider == "facebook"
+            networks['facebook'] = 'na'
           end
         end
         response['networks'] = networks
