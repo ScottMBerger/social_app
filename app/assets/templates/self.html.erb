@@ -24,15 +24,28 @@
 <!--<p>{{advanced}}</p>-->
 <div ng-lazy-show="mode == 1">
 	<!--<p>{{advanced}}</p>-->
-		
       	<ul class="center">
-	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('twitter') >= 0}" ng-click="authNetworkAdd('twitter')">Link Twitter <i class="fa fa-twitter"></i></span></li>
+	        <li>
+		        <span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('twitter') >= 0}" ng-click="authNetworkAdd('twitter')">
+		        	<div ng-lazy-show="root.loaderN != 'twitter'">Link Twitter <i class="fa fa-twitter"></i></div>
+		        	<div ng-lazy-show="root.loaderN == 'twitter'" class="preloader-wrapper small active">
+	              <div class="spinner-layer spinner-blue-only">
+	                <div class="circle-clipper left">
+	                  <div class="circle"></div>
+	                </div><div class="gap-patch">
+	                  <div class="circle"></div>
+	                </div><div class="circle-clipper right">
+	                  <div class="circle"></div>
+	                </div>
+	              </div>
+	            </div>            
+		        </span>
+	        	    
+	        </li>
 	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('facebook') >= 0}" ng-click="authNetworkAdd('facebook')">Link Facebook <i class="fa fa-facebook"></i></span></li>
 	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('google_oauth2') >= 0}" ng-click="authNetworkAdd('google_oauth2')">Link Google <i class="fa fa-google"></i></span></li>
 	        <li><span class="btn dash-subs login-btn linkButton" ng-class="{'disabled': advanced['providers'].indexOf('instagram') >= 0}" ng-click="authNetworkAdd('instagram')">Link Instagram <i class="fa fa-instagram"></i></span></li>
       	</ul>
-        
-   
 </div>
 
 <div ng-lazy-show="!mode || mode == 2">

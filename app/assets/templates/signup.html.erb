@@ -129,9 +129,35 @@
             <div class="row">
               <div class="center-align col s12">
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('instagram')"><i class="fa fa-instagram"></i></span>
-                <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')"><i class="fa fa-twitter"></i></span>
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('twitter')">
+                  <i ng-lazy-show="loaderN != 'twitter'" class="fa fa-twitter"></i>
+                  <div ng-lazy-show="loaderN == 'twitter'" class="preloader-wrapper small active">
+                    <div class="spinner-layer spinner-blue-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                  </div>                
+                </span>
                 <span class="btn dash-subs login-btn" ng-click="authNetwork('facebook')"><i class="fa fa-facebook"></i></span>
-                <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')"><i class="fa fa-google"></i></span>
+                <span class="btn dash-subs login-btn" ng-click="authNetwork('google_oauth2')">
+                  <i ng-lazy-show="loaderN != 'google_oauth2'" class="fa fa-google"></i>
+                  <div ng-lazy-show="loaderN == 'google_oauth2'" class="preloader-wrapper small active">
+                    <div class="spinner-layer spinner-blue-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                  </div>
+                </spa <div class="spinner-layer spinner-yellow-only">
               </div>
             </div>
         </form>

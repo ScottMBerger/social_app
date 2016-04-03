@@ -31,10 +31,9 @@ h5, h1, p {
 
 .slide {
     position: absolute;
-
     width: 100%;
-
 }
+
 .slide.ng-enter,
 .slide.ng-leave {
     -webkit-transition: all 1.4s ease;
@@ -58,11 +57,37 @@ h5, h1, p {
     margin: 2px;
 }
 
-#loginModal {
-    width: 30%;
-}
+
 
 #logo-container {
     color: white;
 }
 
+#loginModal {
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+
+@media screen and (min-width: 1400px) /* Desktop */ {
+  #loginModal {
+    width: 33%;
+  }
+}
+
+@media screen and (max-width: 980px) /* DesktopS */ {
+  #loginModal {
+    width: 55%;
+  }
+}
+
+@media screen  and (max-width: 979px) /* Tablet */ {
+  #loginModal {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 500px) /* Mobile */ {
+  #loginModal {
+    width: 80%;
+  }
+}

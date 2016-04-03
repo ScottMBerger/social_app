@@ -25,6 +25,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
       if (loginLoad == 2) {
         return;
       }
+      console.log("startuser go");
       User.show().$promise.then(function(data) {
         if (data['user']) {
           console.log("this user is logged in");
@@ -46,6 +47,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
       		$scope.$apply();
       		
       		if (data['user']) {
+      		  $scope.user.view_count = $scope.user.view_count > 0 ? $scope.user.view_count : 1;
       		  highestCount = $scope.user.view_count;
         		Object.keys(networkCounters).forEach(function (key) {
                highestCount = networkCounters[key]['num'] > highestCount ? networkCounters[key]['num'] : highestCount;
@@ -55,7 +57,6 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
                new Counter(networkCounters[key]['c'], networkCounters[key]['num']);
             });
       		}
-      		
       	}, 1000);
     });
   }
@@ -63,6 +64,8 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
   console.log("log111");
   $scope.authNetworkAdd = function (network) {
       if ($scope.advanced['providers'].indexOf(network) == -1) {
+        loginLoad = 3;
+        $scope.root.loaderN = network;
         var openUrl = 'users/auth/' + network;
         window.$windowScope = $scope;
         window.open(openUrl, "Authenticate Account", "width=500, height=500");
@@ -86,10 +89,10 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
 	}
 	
 	function correctLength(init) {
-		$scope.length = highestCount.toString().length > 3 || (highestCount.toString().length == 3 && init) ? highestCount.toString().length + 1 : 3;
-		if (highestCount.toString().length >= 4 && (highestCount/(Math.pow(10,(highestCount.toString().length)))) < 0.6) {
-			$scope.length = highestCount.toString().length;
-		}
+		$scope.length = highestCount.toString().length > 3 || (highestCount.toString().length == 3 && init) ? highestCount.toString().length : 3;
+		//if (highestCount.toString().length >= 4 && (highestCount/(Math.pow(10,(highestCount.toString().length)))) < 0.6) {
+			//$scope.length = highestCount.toString().length;
+		//}
 		$scope.counterLength = new Array($scope.length);
 	}
   function Counter(dotclass, countnumber) {
@@ -111,7 +114,12 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
   
   $scope.root.$on('devise:login', function(event, currentUser) {
      console.log("loginon userjs");
-     StartUser();
+     
+     	setTimeout(function(){	
+     	  StartUser();
+     	  $scope.root.loaderN = null;
+    	}, 500);
+     
      $scope.goto = 'self.html';
   });
   $scope.root.$on('devise:logout', function(event, oldCurrentUser) {
@@ -119,17 +127,7 @@ app.controller('UserCtrl', ['$scope', '$routeParams', 'User', 'Auth', '$http', f
     loginLoad = -1;
     StartUser();
   });
-  
-  function onYtEvent(payload) {
-    if (payload.eventType == 'subscribe') {
-      // Add code to handle subscribe event.
-    } else if (payload.eventType == 'unsubscribe') {
-      // Add code to handle unsubscribe event.
-    }
-    if (window.console) { // for debugging only
-      window.console.log('YT event: ', payload);
-    }
-  }
+
   
 }]);
 

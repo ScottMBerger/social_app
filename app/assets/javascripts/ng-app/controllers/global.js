@@ -29,7 +29,8 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
   $scope.newUser = {};
   $scope.user = {};
   $scope.currentUser = null;
-
+  $scope.loggerIn = false;
+  
   var config = {
       headers: {
           'X-HTTP-Method-Override': 'POST'
@@ -61,6 +62,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
         console.log("logout()");
         checkLogin();
         $location.path();
+        $scope.loggerIn = false;
         Materialize.toast('You have been logged out', 3000);
     }, function(error) {
         console.log(error);
@@ -91,7 +93,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
             Materialize.toast('Welcome, '+ $scope.newUser.username + '. Your account is ready to go.', 4000);
           }
           $timeout(registerDone, 1000);
-
+          $scope.loggerIn = true;
       }, function(error) {
           $scope.regError = error.data.errors;
       });
@@ -102,6 +104,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
       
   };
   
+  
   $scope.login = function() {
         var credentials = {
             login: $scope.user.username,
@@ -110,7 +113,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
         };
 
         Auth.login(credentials, config).then(function(user) {
-            console.log(user); // => {id: 1, ect: '...'}
+            console.log($scope.currentUser); // => {id: 1, ect: '...'}
             $('#loginModal').closeModal();
             if ($scope.currentUser) {
               Materialize.toast("Account updated successfully", 4000);
@@ -120,7 +123,8 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
             }
             
             $location.path('/' + user.username);
-            
+            $scope.loggerIn = true;
+            console.log("logged innnnn")
         }, function(error) {
             $scope.logError = error.data.error;
             Materialize.toast("Login info doesn't match, retry", 4000);
@@ -153,6 +157,11 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
   };
 
    $scope.handlePopupAuthentication = function handlePopupAuthentication(account) {
+      
+      function loadNull() {
+        $scope.loaderN = null;
+      }
+      $timeout(loadNull, 1000);
       account = angular.fromJson(account);
       console.log(account);
       $scope.newNeedChange = account.id;
@@ -176,6 +185,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
    };
 
    $scope.authNetwork = function authNetwork(network) {
+      $scope.loaderN = network;
       var openUrl = 'users/auth/' + network;
       window.$windowScope = $scope;
       window.open(openUrl, "Authenticate Account", "width=500, height=500");
@@ -183,6 +193,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
    
    $scope.$on('devise:new-session', function(event, currentUser) {
        console.log("new session");
+       $scope.currentUser = currentUser.username;
     });
     
     $scope.$on('devise:login', function(event, currentUser) {
