@@ -1,8 +1,5 @@
-== README
+== Social Count App with OAuth
 
 Uses AngularJS for the front and Ruby on Rails for the back.
 
 Requires a .env file in the root directory with OAuth keys.
-
-
-<tt>rake doc:app</tt>.
