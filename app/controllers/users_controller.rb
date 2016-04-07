@@ -53,7 +53,7 @@ class UsersController < ApplicationController
           elsif identity.provider == "google_oauth2"
             networks['google'] = identity.extra
           elsif identity.provider == "instagram"
-            networks['instagram'] = 'na'
+            networks['instagram'] = identity.extra
           elsif identity.provider == "facebook"
             networks['facebook'] = 'na'
           end

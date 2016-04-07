@@ -16,6 +16,9 @@ class Identity < ActiveRecord::Base
       identity.save!
     elsif auth.provider == "facebook" && identity && !identity.extra
       puts auth
+    elsif auth.provider == "instagram" && identity && !identity.extra
+      identity.extra = auth.info.nickname
+      identity.save!
     end
     
     identity
