@@ -23,8 +23,9 @@ angular.module('AngularRails').controller('UpdateCtrl', ['$scope','NewUser','$lo
       }
       
       user.$update(function(data) {
+        console.log(data);
         if (data.response == 'updated') {
-          $scope.root.currentUser = $scope.update.name;
+          $scope.root.currentUser = $scope.update.name ? $scope.update.name : $scope.root.couldUsername;
           $scope.root.profile_set = false;
           $scope.root.email_set = false;
           $('#loginModal').closeModal();

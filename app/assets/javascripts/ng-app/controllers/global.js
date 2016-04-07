@@ -116,7 +116,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
             console.log($scope.currentUser); // => {id: 1, ect: '...'}
             $('#loginModal').closeModal();
             if ($scope.currentUser) {
-              Materialize.toast("Account updated successfully", 4000);
+              Materialize.toast("Success", 4000);
             } else {
               $scope.currentUser = user.username;
               Materialize.toast("Welcome, " + user.username + ". You're logged in now.", 4000);
@@ -163,6 +163,7 @@ angular.module('AngularRails').controller('GlobalCtrl', ['$scope','$location', '
       }
       $timeout(loadNull, 1000);
       account = angular.fromJson(account);
+      $scope.couldUsername = account.username;
       console.log(account);
       $scope.newNeedChange = account.id;
       var continueLogin = true;
